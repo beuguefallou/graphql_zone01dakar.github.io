@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Login Page</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🗝️</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        import { fetchUserData, } from "./js/app.js";
+
+        function checkAuth() {
+            const authToken = localStorage.getItem("authToken");
+
+            if (authToken) {
+                // If no authToken is found, redirect to the login page
+                window.location.href = "profile.html";
+            }
+        }
+        checkAuth();
+    </script>
+</head>
+
+<body >
+    <style>
+        *,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: bold;
+        }
+
+        .underlined {
+            position: relative;
+        }
+
+        .underline-overflow {
+            display: inline-block;
+            overflow: hidden;
+            padding-bottom: clamp(1rem, 2vmin, 2rem);
+        }
+
+        .underline-overflow:after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            height: 250%;
+            aspect-ratio: 2.5 / 1;
+            left: 50%;
+            transform: translate(-50%, -6%);
+            border-radius: 50%;
+        }
+    </style>
+   
+   
+        <div class="relative h-full ml-0 mr-0 sm:mr-6">
+            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-black rounded-lg"></span>
+            <div class="relative h-full p-5 bg-white border-2 border-black rounded-lg">
+                <form id="loginForm" class="w-full h-full flex items-center justify-center flex-col" >
+                    <h2 class="mb-5 font-bold text-4xl">Please log in using your student credentials  ❤️, <br>to access and view your profile.</h2>
+                    <div class="mt-5 w-full">
+                        <label for="email" class="block mb-2 text-sm font-medium text-white-900">Email or Username</label>
+                        <input id="username" name="username" type="text" name="email" id="email"
+                            class="bg-gray-50 border-2 border-black text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            placeholder="abc@gmail.com or username" required>
+                    </div>
+                    <div class="mt-5 w-full">
+                        <label for="password" class="block mb-2 text-sm font-medium text-white-900">Password</label>
+                        <input id="password" name="password" type="password" name="password" id="password"
+                            placeholder="••••••••••••"
+                            class="bg-gray-50 border-2 border-black text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            required>
+                    </div>
+                    <p id="failed-login" style="color: rgb(222, 217, 251); font-weight: 700; font-style: italic; font-family: Verdana, Geneva, Tahoma, sans-serif;"
+                    ></p>
+                    <button type="submit"
+                    style="color: rgb(222, 217, 251); font-weight: 700; font-style: italic; font-family: Verdana, Geneva, Tahoma, sans-serif;"
+                        class="w-full mt-5 text-white bg-black hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign
+                        in</button>
+                    <div id="error-message" class="text-red-600"></div>
+                </form>
+            </div>
+        </div>
+ 
+    <script type="module">
+        import { login } from "./js/app.js";
+        loginForm.addEventListener("submit", login);
+    </script>
+</body>
+
+</html>
